@@ -1,0 +1,657 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Semestrovka</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1976d2;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: #d82423;
+            text-align: center;
+            margin: 25px 0;
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #d82423;
+        }
+
+        h3 {
+            color: #1565c0;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .tour-form {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            border: 1px solid #e1f5fe;
+        }
+
+        .tour-form h3 {
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1565c0;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1976d2;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #90a4ae;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .delete-message {
+            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+            border: 1px solid #d82423;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #c62828;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .delete-message h3 {
+            color: #d82423;
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .TVMainForm {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1f5fe;
+            max-width: 900px;
+        }
+
+        .TVSearchingFormFlexBlock {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .TVHotelTourDetailSearchFilter,
+        .TVFlyDatesFilter,
+        .TVNightsFilter {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .TVHotelTourDetailSearchFilter input,
+        .TVFlyDatesFilter input,
+        .TVNightsFilter input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .TVHotelTourDetailSearchFilter input:focus,
+        .TVFlyDatesFilter input:focus,
+        .TVNightsFilter input:focus {
+            outline: none;
+            border-color: #1976d2;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        }
+
+        .TVSearchButton {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #d82423 0%, #b71c1c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 140px;
+        }
+
+        .TVSearchButton:hover {
+            background: linear-gradient(135deg, #b71c1c 0%, #8b0000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(216, 36, 35, 0.3);
+        }
+
+        form[action="/bycityadmin"] {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8f4fd;
+            max-width: 600px;
+        }
+
+        form[action="/bycityadmin"] input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        form[action="/bycityadmin"] input:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        }
+
+        form[action="/bycityadmin"] button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        form[action="/bycityadmin"] button:hover {
+            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
+        }
+
+        .line_down {
+            margin: 40px auto;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #7a7a78 50%, transparent 100%);
+            max-width: 500px;
+        }
+
+        .admin-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1f5fe;
+            max-width: 800px;
+        }
+
+        .tour-id {
+            color: #d82423;
+            font-weight: 700;
+            font-size: 20px;
+        }
+    </style>
+
+
+</head>
+<body>
+<h1> вы вошли </h1>
+
+$if(User.Permission)
+<h2>Вы админ! </h2>
+
+<h3>Тур с Id ${Tour.Id} был успешно удален!
+</h3>
+
+
+<form action="/create" method="POST" class="tour-form">
+    <h3>Создание нового тура</h3>
+    
+    <div class="form-group">
+        <label for="Country">Страна:</label>
+        <input type="text" id="Country" name="Country" required 
+               placeholder="Например: Россия, Турция, Испания" 
+               maxlength="50"
+               pattern="[A-Za-zА-Яа-яЁё\s]+"
+               title="Только буквы и пробелы">
+    </div>
+
+    <div class="form-group">
+        <label for="City">Город:</label>
+        <input type="text" id="City" name="City" required 
+               placeholder="Например: Москва, Анталья, Барселона"
+               maxlength="50"
+               pattern="[A-Za-zА-Яа-яЁё\s]+"
+               title="Только буквы и пробелы">
+    </div>
+
+    <div class="form-group">
+        <label for="Stars">Количество звезд:</label>
+        <select id="Stars" name="Stars" required>
+            <option value="">Выберите количество звезд</option>
+            <option value="1">★ (1 звезда)</option>
+            <option value="2">★★ (2 звезды)</option>
+            <option value="3">★★★ (3 звезды)</option>
+            <option value="4">★★★★ (4 звезды)</option>
+            <option value="5">★★★★★ (5 звезд)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Цена (руб.):</label>
+        <input type="number" id="Price" name="Price" required 
+               min="1" placeholder="Например: 50000"
+               title="Цена должна быть положительным числом">
+    </div>
+
+    <button type="submit" class="submit-btn">Создать тур</button>
+</form>
+
+<h3>Поиск тура для изменения: </h3>
+<form action="/bycityadmin" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                                <input type="text" name="cityName" placeholder="Введите название города" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;" required>
+                                <button type="submit" style="background-color: rgb(216, 36, 35); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                                    Поиск по городу
+                                </button>
+                            </form>
+$endif
+
+
+
+<div class="TVMainForm" style="background-color: rgba(200, 223, 237, 0.8); background-image: none; color: rgb(4, 4, 4);">
+    <form action="/tour/search" method="POST">
+        <div class="TVMainFilter TVSearchingFormFlexBlock">
+            <!-- Страна -->
+            <div class="TVHotelTourDetailSearchFilter">
+                <input type="text" name="country" placeholder="Страна" value="" required>
+            </div>
+
+            <!-- Количество звезд -->
+            <div class="TVFlyDatesFilter">
+                <input type="number" name="stars" placeholder="Количество звезд" min="1" max="5" required>
+            </div>
+
+            <!-- Бюджет -->
+            <div class="TVNightsFilter">
+                <input type="number" name="budget" placeholder="Бюджет (до какой суммы)" min="1" required>
+            </div>
+
+            <!-- Кнопка поиска -->
+            <button type="submit" class="TVSearchButton TVButtonColor TVButtonHover" style="background-color: rgb(216, 36, 35); background-image: none; color: rgb(255, 255, 255); border: none; cursor: pointer;">
+                Список туров
+            </button>
+        </div>
+    </form>
+</div>
+
+</div>
+                        
+                    </div>
+                </div>
+            </div>
+           
+            
+            
+        </div>
+    </div>
+</div>
+
+
+	
+    <hr align="center" width="500" size="2" color="#7a7a78" class="line_down">
+    <br>
+	
+	<style>
+        @media only screen  and (max-width: 395px){
+            .text_why_us{
+                font-size: 12px !important;
+    		    font-weight: 600 !important;
+            }
+        }
+        .why_us{
+            display: none;
+        }
+        .line_down{
+            display: none;
+        }
+		.why_us_div{
+			display: inline-block; 
+			margin-left:10px;
+			margin-bottom: 20px;
+		}
+		.icon_hot{
+			width: 60px;
+			height: 60px;
+			display: inline-block !important;
+			margin-bottom: -10px
+		}
+		.text_why_us{
+			display: inline-block !important;
+			font-size: 15px;
+    		font-weight: 500;
+			margin-left:20px;
+			margin-bottom: 0px !important;
+		}
+        .banner{
+            display: none;
+        }
+	</style>
+</div>
+<script type="text/javascript" src="//tourvisor.ru/module/init.js"></script>
+
+
+
+
+<style>
+    @media only screen  and (max-width: 500px){
+        .tv_mobile{
+            display: block !important;
+        }
+        .tv_comp{
+            display: none !important;
+        }
+        .banner{
+            display: block !important;
+        }
+        .hot_tours_mob{
+            display: block !important;
+        }
+        .why_us{
+            display: block;
+        }
+        .line_down{
+            display: block;
+        }
+    }
+    .hot_tours_mob{
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        line-height: 17px;
+        text-transform: uppercase;
+        /* border-right: 1px solid #fff; */
+        line-height: 50px;
+        color: black;
+        display: block;
+        margin-top: 20px !important;
+        /* float: left; */
+        text-align: center;
+        font-family: 'Open Sans',Arial !important;
+    }
+    .tv_mobile{
+        display: none;
+    }
+    .hot_tours_tourvisor{
+        display: block;
+    }
+    .custom-btn {
+        width: 150px;
+        height: 40px;
+        color: #000;
+        border-radius: 5px;
+        padding: 10px 25px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        left: 820px;
+        top: 20px;
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        outline: none;
+        }
+        .btn-4 {
+        background-color: #9ef305;
+        background-image: linear-gradient(315deg, #9ef305 0%, #9ef305 74%);
+        line-height: 42px;
+        padding: 0;
+        border: none;
+        }
+        .btn-4:hover{
+        background-color: #89d8d3;
+        background-image: linear-gradient(315deg, #9ef305 0%, #9ef305 74%);
+        }
+        .btn-4 span {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        }
+        .btn-4:before,
+        .btn-4:after {
+        position: absolute;
+        content: "";
+        right: 0;
+        top: 0;
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.9),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        transition: all 0.3s ease;
+        }
+        .btn-4:before {
+        height: 0%;
+        width: .1px;
+        }
+        .btn-4:after {
+        width: 0%;
+        height: .1px;
+        }
+        .btn-4:hover:before {
+        height: 100%;
+        }
+        .btn-4:hover:after {
+        width: 100%;
+        }
+        .btn-4 span:before,
+        .btn-4 span:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 0;
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.9),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        transition: all 0.3s ease;
+        }
+        .btn-4 span:before {
+        width: .1px;
+        height: 0%;
+        }
+        .btn-4 span:after {
+        width: 0%;
+        height: .1px;
+        }
+        .btn-4 span:hover:before {
+        height: 100%;
+        }
+        .btn-4 span:hover:after {
+        width: 100%;
+        }
+
+    .subheader {
+        font-size: 18px;
+    }
+
+    .newsImage {
+        float: left;
+        margin: 3px;
+        max-width: 90%;
+    }
+
+    .row {
+        width: 100%;
+        margin: 0 auto;
+        background-color: white;
+    }
+
+    .block {
+        width: 31%;
+        float: left;
+        background-color: white;
+        padding: auto;
+        padding-left: 10px;
+        /*margin-left: 1%;*/
+        padding: 1%;
+    }
+
+    .fcc-btn {
+        background-color: #d82424;
+        color: white !important;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        border-radius: 1px;
+    }
+
+    .fcc-btn:hover {
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .subheader {
+            font-size: 18px;
+        }
+
+        .newsImage {
+            float: left;
+            margin: 3px;
+            max-width: 90%;
+        }
+
+        .row {
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+
+            display: table-cell;
+            vertical-align: middle;
+
+        }
+
+        .block {
+            width: 100%;
+            float: left;
+            background-color: white;
+            padding: auto;
+            padding-left: 10px;
+            /*margin-left: 1%;*/
+            padding: 1%;
+        }
+
+        .fcc-btn {
+            background-color: #d82424;
+            color: white !important;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 1px;
+        }
+
+        .fcc-btn:hover {
+            text-decoration: none;
+        }
+
+        .block-btn {
+            text-decoration: none;
+        }
+
+    }
+</style>
+
+
+
+
+
+
+
+	
+</body>
+</html>
