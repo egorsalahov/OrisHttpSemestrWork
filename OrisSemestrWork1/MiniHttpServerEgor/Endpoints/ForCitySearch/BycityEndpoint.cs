@@ -14,7 +14,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCitySearch
     [Endpoint]
     public class BycityEndpoint : EndpointBase
     {
-        private string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
+       
 
         // Post /bycity
         [HttpPost("bycity")]
@@ -25,7 +25,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCitySearch
 
             try
             {
-                ORMContext context = new ORMContext(_connectionString);
+                ORMContext context = new ORMContext();
 
                 tours = context.Tours.GetByCity(cityName);
 

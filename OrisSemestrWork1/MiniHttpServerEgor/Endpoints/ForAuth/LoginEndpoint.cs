@@ -15,7 +15,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForAuth
     [Endpoint]
     public class LoginEndpoint : EndpointBase
     {
-        private string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
+        
 
         // Post /tour/login
         [HttpPost("login")]
@@ -28,7 +28,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForAuth
 
             try
             {
-                ORMContext context = new ORMContext(_connectionString);
+                ORMContext context = new ORMContext();
 
                 isNewUser = false; ; //чтобы проверить: вдруг пользователь пытается войти не зарегестрировавшись
 

@@ -15,7 +15,7 @@ namespace MiniHttpServerEgor.Endpoints
     [Endpoint]
     public class TourEndpoint : EndpointBase
     {
-        private string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
+       
 
         // /tour
         [HttpGet()]
@@ -36,7 +36,7 @@ namespace MiniHttpServerEgor.Endpoints
 
             try
             {
-                ORMContext context = new ORMContext(_connectionString);
+                ORMContext context = new ORMContext();
 
                 tours = context.Tours.GetByFilter(country, stars, budget);
 

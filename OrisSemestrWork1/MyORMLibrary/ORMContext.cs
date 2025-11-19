@@ -16,16 +16,15 @@ namespace MyORMLibrary
     // MyORMLibrary/ORMContext.cs
     public class ORMContext
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
 
         public ITourRepository Tours { get; }
         public IUserRepository Users { get; }
 
-        public ORMContext(string connectionString)
+        public ORMContext()
         {
-            _connectionString = connectionString;
-            Tours = new TourRepository(connectionString);
-            Users = new UserRepository(connectionString);
+            Tours = new TourRepository(_connectionString);
+            Users = new UserRepository(_connectionString);
         }
     }
 }

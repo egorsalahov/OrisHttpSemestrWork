@@ -14,7 +14,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForAuth
     [Endpoint]
     public class JoinEndpoint : EndpointBase
     {
-        private string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
+       
 
         // Post /tour/join
         [HttpPost("join")]
@@ -24,7 +24,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForAuth
 
             try
             {
-                ORMContext context = new ORMContext(_connectionString);
+                ORMContext context = new ORMContext();
 
                 user = context.Users.Add(login, password);
 

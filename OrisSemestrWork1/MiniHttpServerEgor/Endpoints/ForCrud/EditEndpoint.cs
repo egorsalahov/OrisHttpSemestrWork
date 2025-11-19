@@ -14,7 +14,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCrud
     [Endpoint]
     public class EditEndpoint : EndpointBase
     {
-        private string _connectionString = "Host=localhost;Port=5432;Database=tours_db;Username=postgres;Password=197911";
+       
 
         [HttpPost]
         public IHttpResult Delete(int tourId, int newPrice)
@@ -25,7 +25,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCrud
 
             try
             {
-                ORMContext context = new ORMContext(_connectionString);
+                ORMContext context = new ORMContext();
 
                 tour = context.Tours.UpdatePrice(tourId, newPrice);
 
