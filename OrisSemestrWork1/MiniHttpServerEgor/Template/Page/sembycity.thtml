@@ -1,980 +1,141 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Semestrovka</title>
-
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .TVMainForm {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e1f5fe;
-            max-width: 900px;
-        }
-
-        .TVSearchingFormFlexBlock {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .TVHotelTourDetailSearchFilter,
-        .TVFlyDatesFilter,
-        .TVNightsFilter {
-            flex: 1;
-            min-width: 180px;
-        }
-
-        .TVHotelTourDetailSearchFilter input,
-        .TVFlyDatesFilter input,
-        .TVNightsFilter input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e3f2fd;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #fafafa;
-            transition: all 0.3s ease;
-        }
-
-        .TVHotelTourDetailSearchFilter input:focus,
-        .TVFlyDatesFilter input:focus,
-        .TVNightsFilter input:focus {
-            outline: none;
-            border-color: #1976d2;
-            background-color: white;
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
-        }
-
-        .TVSearchButton {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #d82423 0%, #b71c1c 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 140px;
-        }
-
-        .TVSearchButton:hover {
-            background: linear-gradient(135deg, #b71c1c 0%, #8b0000 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(216, 36, 35, 0.3);
-        }
-
-        .TVSearchResults {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e1f5fe;
-            max-width: 1000px;
-        }
-
-        .TVResultNavigationControl {
-            background: #f8fdff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid #e1f5fe;
-        }
-
-        .TVResultNavigationListView form {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .TVResultNavigationListView input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e3f2fd;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-
-        .TVResultNavigationListView input:focus {
-            outline: none;
-            border-color: #1976d2;
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
-        }
-
-        .TVResultNavigationListView button {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .TVResultNavigationListView button:hover {
-            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(21, 101, 192, 0.3);
-        }
-
-        .TVResultListViewItem {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e8f4fd;
-            transition: all 0.3s ease;
-        }
-
-        .TVResultListViewItem:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .TVHotelResultItem {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .TVResultItemImageWrapper {
-            flex-shrink: 0;
-            width: 200px;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .TVPhotoGalleryImage {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease;
-        }
-
-        .TVResultListViewItem:hover .TVPhotoGalleryImage {
-            transform: scale(1.05);
-        }
-
-        .TVResultItemBodyWrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .TVResultItemTitle {
-            margin-bottom: 8px;
-        }
-
-        .TVHotelInfoTitleLink {
-            background: none;
-            border: none;
-            color: #1976d2;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: left;
-            padding: 0;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .TVHotelInfoTitleLink:hover {
-            color: #1565c0;
-            text-decoration: underline;
-        }
-
-        .TVResultItemSubTitle {
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .TVResultItemDescription {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .TVResultItemPrice {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
-        .TVResultItemPriceValue {
-            font-size: 24px;
-            font-weight: 700;
-            color: #d82423;
-        }
-
-        .TVResultItemPriceCurrency {
-            font-size: 14px;
-            color: #666;
-            margin-left: 5px;
-        }
-
-        .TVResultToursControl {
-            background: #f8fdff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-            border: 1px solid #e1f5fe;
-        }
-
-        .TVResultNavButton {
-            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 15px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .TVResultNavButton:hover {
-            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(21, 101, 192, 0.3);
-        }
-
-        .line_down {
-            margin: 40px auto;
-            border: none;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #7a7a78 50%, transparent 100%);
-            max-width: 500px;
-        }
-
-        .TVTourResultByRoomItem {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 1px solid #e8f4fd;
-            transition: all 0.3s ease;
-        }
-
-        .TVTourResultByRoomItem:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .TVTourResultByRoomItemContent {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .TVTourResultByRoomItemInfoWrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .TVTourResultByRoomItemImage {
-            width: 80px;
-            height: 60px;
-            border-radius: 6px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .TVTourResultByRoomItemName {
-            font-weight: 600;
-            color: #1976d2;
-            margin-bottom: 5px;
-        }
-
-        .TVTourResultByRoomItemParams {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .TVTourResultByRoomItemPriceWrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .TVTourResultByRoomItemPrice {
-            font-size: 18px;
-            font-weight: 700;
-            color: #d82423;
-        }
-
-        .TVTourResultByRoomItemPriceCurrency {
-            font-size: 12px;
-            color: #666;
-        }
-    </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Горящие Туры</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <header class="header">
+    <div class="container header-container">
+        <div class="logo-and-links">
+            <div class="logo">
+                <img src="logo-goryashchih.png" alt="Сеть магазинов Горящих Путёвок" class="logo-img">
+            </div>
+            
+        </div>
 
-	
+        <!-- Формы авторизации и регистрации -->
+        <div class="auth-section">
+            <!-- Форма регистрации -->
+            <form action="/join" method="POST" class="auth-form-inline">
+                <input type="text" name="login" placeholder="Логин" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <button type="submit" class="btn-auth">Зарегистрироваться</button>
+            </form>
 
-<div class="TVMainForm" style="background-color: rgba(200, 223, 237, 0.8); background-image: none; color: rgb(4, 4, 4);">
-    <form action="/tour/search" method="POST">
-        <div class="TVMainFilter TVSearchingFormFlexBlock">
-            <!-- Страна -->
-            <div class="TVHotelTourDetailSearchFilter">
-                <input type="text" name="country" placeholder="Страна" value="" required>
+            <!-- Форма входа -->
+            <form action="/login" method="POST" class="auth-form-inline">
+                <input type="text" name="login" placeholder="Логин" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <button type="submit" class="btn-auth">Войти</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+    <div class="main-nav-wrapper">
+        <div class="container main-nav-container">
+            <nav class="main-nav">
+                <a href="#" class="nav-item active">Горящие туры</a>
+                <a href="#" class="nav-item">Поиск тура</a>
+                <a href="#" class="nav-item">Поиск отеля</a>
+                <a href="#" class="nav-item">Офисы продаж</a>
+                <a href="#" class="nav-item">О компании</a>
+                <a href="#" class="nav-item">Индекс Горящих</a>
+            </nav>
+        </div>
+    </div>
+
+    <main class="content-wrapper">
+        <div class="container search-container">
+            <div class="search-top-row">
+                
+                
             </div>
 
-            <!-- Количество звезд -->
-            <div class="TVFlyDatesFilter">
-                <input type="number" name="stars" placeholder="Количество звезд" min="1" max="5" required>
+           <div class="TVMainForm">
+    <form action="/tour/search" method="POST">
+        <div class="search-input-row">
+            <div class="input-with-icon">
+                <img src="map-pin.svg" alt="Иконка локации" class="input-icon">
+                <input type="text" name="country" placeholder="Страна" class="main-search-input" required>
+                <span class="arrow-down"></span>
+            </div>
+        </div>
+
+        <div class="filters-row">
+            <!-- Класс отеля(звезды) -->
+            <div class="dropdown filter-hotel-class">
+                <div class="filter-label">Звезды</div>
+                <input 
+                    type="number" 
+                    name="stars" 
+                    min="1" 
+                    max="5" 
+                    placeholder="1–5" 
+                    class="main-search-input number-input"
+                    required
+                >
             </div>
 
             <!-- Бюджет -->
-            <div class="TVNightsFilter">
-                <input type="number" name="budget" placeholder="Бюджет (до какой суммы)" min="1" required>
+            <div class="dropdown filter-meal-plan">
+                <div class="filter-label">Бюджет</div>
+                <input 
+                    type="number" 
+                    name="budget" 
+                    min="1" 
+                    placeholder="₽" 
+                    class="main-search-input number-input"
+                    required
+                >
             </div>
 
             <!-- Кнопка поиска -->
-            <button type="submit" class="TVSearchButton TVButtonColor TVButtonHover" style="background-color: rgb(216, 36, 35); background-image: none; color: rgb(255, 255, 255); border: none; cursor: pointer;">
-                Список туров
-            </button>
+            <button type="submit" class="btn btn-search">Найти туры</button>
         </div>
     </form>
 </div>
+        
 
-</div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="TVSearchResults" style="width: 978px;">
-                <div class="TVResultToolbar" style="height: auto;">
-                    <div class="TVResultToolbarFloat" style="width: 978px;">
-                        <div class="TVResultToolbarActions">
-                            
-                            <div class="TVResultToolbarActionRight">
-                                <div class="TVResultToolbarButton TVResultToolbarUp TVButtonHover TVHide" title="Наверх"></div>
-                                <div class="TVResultToolbarProgress TVHide">
-                                    <div class="TVProgressBar">
-                                        <div class="TVProgressLine TVActive" style="width: 100%;">100%</div>
-                                    </div>
-                                </div>
-                                <div class="TVResultToolbarButton TVResultToolbarTrack TVButtonHover TVHide"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="TVResultContentNavigationWrapper">
-                    <div class="TVResultNavigationControl">
-                        <div class="TVResultNavigationListView">
-                            <form action="/bycity" method="POST" style="display: flex; align-items: center; gap: 10px;">
-                                <input type="text" name="cityName" placeholder="Введите название города" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;" required>
-                                <button type="submit" style="background-color: rgb(216, 36, 35); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                                    Поиск по городу
-                                </button>
-                            </form>
-                        </div>
-                        <div class="TVResultNavigationMap">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="TVResultContentListWrapper">
-                    <div class="TVResultContentHotelCollectionsWrapper">
-                        <div class="TVReadyHotelsCollections TVHide TVResultContentHotelCollections">
-                            <div class="TVReadyHotelsCollectionsHeader">
-                                <div class="TVReadyHotelsCollectionsHeaderTitle"></div>
-                                <div class="TVReadyHotelsCollectionsToggleBtn"></div>
-                            </div>
-                            <div class="TVReadyHotelsCollectionsBody TVHide">
-                                <div class="TVReadyHotelsCollectionsList">
-                                    <div class="TVListBox"></div>
-                                </div>
-                                <div class="TVReadyHotelsCollectionsHideBtn"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="TVResultListView TVStyleTheme2">
-                        <div class="TVResultListViewBody TVResultContentList">
-                            <div class="TVResultListViewList">
-                                $foreach(var tour in tours)
-                                
-                                    <div class="TVResultListViewItem">
-                                    <div class="TVHotelResultItem">
-                                        <div class="TVHotelResulItemInfo">
-                                            <div class="TVHotelInfo">
-                                                <div class="TVResultItem">
-                                                    <div class="TVResultItemImageWrapper TVSize-M">
-                                                        <div class="TVResultItemImage">
-                                                            <div class="TVGallery TVResultItemGallery">
-                                                                <div class="TVGallContainer">
-                                                                    <div class="TVGallList TVPhotoSwitchingTransform" style="width: 100%; transform: translate(0%, 0px);">
-                                                                        <div class="TVPhotoGalleryImage TVBackgroundSize-Cover" style="background-image: url(&quot;https://static.tourvisor.ru/hotel_pics/main400/74453.jpg&quot;);"></div>
-                                                                    </div>
-                                                                    <div class="TVGallLeft TVDisabled TVHide TVSize-M"></div>
-                                                                    <div class="TVGallRight TVDisabled TVHide TVSize-M"></div>
-                                                                    <div class="TVGallCount TVPhotoGalleryShape-Dots TVHide">
-                                                                        <div class="TVPhotoGalleryCountDot TVActive"></div>
-                                                                    </div>
-                                                                    <div class="TVGallLoupe"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="TVResultItemBodyWrapper TVResultItemBodyWrapperStretched">
-                                                        <div class="TVResultItemHeader">
-                                                            <div class="TVResultItemPreTitle">
-                                                               
-                                                                
-                                                            </div>
-                                                                <div class="TVResultItemTitle">
-                                                                                    <form action="/bigpage" method="POST" style="display: inline;">
-                                                                                    <input type="hidden" name="tourId" value="${tour.Id}">
-                                                                                    <button type="submit" class="TVHotelInfoTitleLink TVLinkButton">
-                                                                                        ${tour.Hotel.Name}
-                                                                                    </button>
-                                                                                </form>
-                                                                </div>
-                                                            <div class="TVResultItemSubTitle">${tour.City}, ${tour.Country}</div>
-                                                        </div>
-                                                        <div class="TVResultItemBeforeDescriptionWrapper">
-                                                            <div class="TVResultItemBeforeDescription"></div>
-                                                            <div class="TVResultItemDescription TVLineClampEnabled TVLineClamp-M" title="Раскрыть/скрыть описание">${tour.Hotel.ShortDescription}</div>
-                                                        </div>
-                                                        <div class="TVResultItemFooter">
-                                                            <div class="TVResultItemNavButtons">
-                                                                <div class="TVResultNavButtons">
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="TVResultItemPrice">
-                                                            <div class="TVResultItemPriceValueWrapper">
-                                                                <div class="TVResultItemOldPrice TVHide"></div>
-                                                                <div class="TVResultItemNewPrice">
-                                                                    <div class="TVResultItemPriceValue">${tour.Price}</div>
-                                                                    <div class="TVResultItemPriceKilo"></div>
-                                                                    <div class="TVResultItemPriceSuffix">
-                                                                        <div class="TVResultItemPriceCurrency">РУБ</div>
-                                                                        <div class="TVResultItemPriceType TVHide"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                           
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="TVHotelResulItemDetail">
-                                        <div class="TVHotelResulItemAbout TVHide"></div>
-                                        <div class="TVHotelResulItemMap TVHide"></div>
-                                        <div class="TVHotelResulItemReviews TVHide"></div>
-                                        <div class="TVHotelResulItemGroupedTours TVHide">
-                                            <div class="TVResultToursControl TVStyleTheme2">
-                                                <div class="TVResultToursContent">
-                                                    <t-table class="TVHide">
-                                                        <t-thead>
-                                                            <t-tr></t-tr>
-                                                        </t-thead>
-                                                        <t-tbody></t-tbody>
-                                                    </t-table>
-                                                    <div>
-                                                        <div class="TVTourResultByRoomItem TVStyleTheme1">
-                                                            <div class="TVTourResultByRoomItemContent TVButtonHover TVClickable">
-                                                                <div class="TVTourResultByRoomItemInfoWrapper">
-                                                                    <div class="TVTourResultByRoomItemImage TVClickable" style="background-image: url(&quot;https://static.tourvisor.ru/hotel_pics/rooms/74453/776503/3423991.jpg&quot;);"></div>
-                                                                    <div class="TVTourResultByRoomItemNameWrapper">
-                                                                        <div class="TVTourResultByRoomItemName">
-                                                                            <t-span class="TVRoomInfo">Economy</t-span>
-                                                                        </div>
-                                                                        <div class="TVTourResultByRoomItemParams">14 м<sup>2</sup>, 1 комната, 1 спальня</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="TVTourResultByRoomItemPriceWrapper">
-                                                                    <div class="TVTourResultByRoomItemPrice">60 279</div>
-                                                                    <div class="TVTourResultByRoomItemPriceKilo"></div>
-                                                                    <div class="TVTourResultByRoomItemPriceCurrency">РУБ</div>
-                                                                    <div class="TVTourResultByRoomItemArrow"></div>
-                                                                    <div class="TVTourResultByRoomItemWaiter TVHide"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="TVTourResultByRoomItemTours TVHide">
-                                                                <t-table>
-                                                                    <t-thead>
-                                                                        <t-tr></t-tr>
-                                                                    </t-thead>
-                                                                    <t-tbody></t-tbody>
-                                                                </t-table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="TVTourResultByRoomItem TVStyleTheme1">
-                                                            <div class="TVTourResultByRoomItemContent TVButtonHover TVClickable">
-                                                                <div class="TVTourResultByRoomItemInfoWrapper">
-                                                                    <div class="TVTourResultByRoomItemImage TVClickable" style="background-image: url(&quot;https://static.tourvisor.ru/hotel_pics/rooms/74453/776506/3423994.jpg&quot;);"></div>
-                                                                    <div class="TVTourResultByRoomItemNameWrapper">
-                                                                        <div class="TVTourResultByRoomItemName">
-                                                                            <t-span class="TVRoomInfo">Standard</t-span>
-                                                                        </div>
-                                                                        <div class="TVTourResultByRoomItemParams">17 м<sup>2</sup>, 1 комната, 1 спальня</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="TVTourResultByRoomItemPriceWrapper">
-                                                                    <div class="TVTourResultByRoomItemPrice">115 926</div>
-                                                                    <div class="TVTourResultByRoomItemPriceKilo"></div>
-                                                                    <div class="TVTourResultByRoomItemPriceCurrency">РУБ</div>
-                                                                    <div class="TVTourResultByRoomItemArrow"></div>
-                                                                    <div class="TVTourResultByRoomItemWaiter TVHide"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="TVTourResultByRoomItemTours TVHide">
-                                                                <t-table>
-                                                                    <t-thead>
-                                                                        <t-tr></t-tr>
-                                                                    </t-thead>
-                                                                    <t-tbody></t-tbody>
-                                                                </t-table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="TVResultToursFooter">
-                                                    <div class="TVResultToursFoooterControl TVStyleTheme2">
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursShareButton TVStyleTheme2 TVPaddingSize-M" title="">
-                                                            <div class="TVResultToursShareContent">
-                                                                <t-span class="TVResultToursShareContentIconWrapper">
-                                                                    <svg fill="#5c6672" viewBox="0 0 17.428 18.854" height="18.854" width="17.428" class="TVResultToursShareContentIcon" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M13.308,18.822H4.114a5.293,5.293,0,0,1-2.48-.32A2.918,2.918,0,0,1,.352,17.218a5.3,5.3,0,0,1-.32-2.482V10.142A5.321,5.321,0,0,1,.256,8.061,2.916,2.916,0,0,1,1.845,6.472a5.327,5.327,0,0,1,2.082-.224,1.023,1.023,0,0,1,0,2.045,5.506,5.506,0,0,0-1.3.067.9.9,0,0,0-.482.482,5.56,5.56,0,0,0-.069,1.3v4.594a5.516,5.516,0,0,0,.1,1.552.887.887,0,0,0,.389.391,5.538,5.538,0,0,0,1.551.1H13.31a5.53,5.53,0,0,0,1.55-.1.9.9,0,0,0,.391-.391,5.534,5.534,0,0,0,.1-1.551v-4.6a5.606,5.606,0,0,0-.067-1.3.9.9,0,0,0-.482-.483,5.6,5.6,0,0,0-1.3-.068,1.022,1.022,0,1,1,0-2.044,5.322,5.322,0,0,1,2.081.223,2.923,2.923,0,0,1,1.589,1.59,5.318,5.318,0,0,1,.223,2.08v4.6a5.281,5.281,0,0,1-.319,2.48A2.922,2.922,0,0,1,15.791,18.5a5.281,5.281,0,0,1-2.483.321ZM7.791,10.571h0V3.107L6.378,4.217A1.022,1.022,0,0,1,5.116,2.609L8.151.229a1.017,1.017,0,0,1,.37-.2h.041l.05-.012A.256.256,0,0,1,8.695,0H8.92l.056.007H9.04l.023.008h.022a1.032,1.032,0,0,1,.391.2L12.51,2.6a1.024,1.024,0,0,1-1.26,1.615L9.836,3.108v7.463a1.023,1.023,0,1,1-2.045,0Z"></path>
-                                                                    </svg>
-                                                                </t-span>
-                                                                <t-span class="TVResultToursShareContentText">Поделиться</t-span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursShowMoreButton TVStyleTheme2 TVPaddingSize-M TVHide" title="">Найти больше туров</div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursGroupButton TVStyleTheme2 TVPaddingSize-M TVActive" title="">Отменить группировку по номерам</div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursMinimizeButton TVStyleTheme2 TVPaddingSize-M TVHide" title="">Свернуть</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="TVHotelResulItemTours TVHide">
-                                            <div class="TVResultToursControl TVStyleTheme2">
-                                                <div class="TVResultToursContent">
-                                                    <t-table>
-                                                        <t-thead>
-                                                            <t-tr></t-tr>
-                                                        </t-thead>
-                                                        <t-tbody></t-tbody>
-                                                    </t-table>
-                                                    <div class="TVHide">
-                                                        <div class="TVTourResultByRoomItem TVStyleTheme1">
-                                                            <div class="TVTourResultByRoomItemContent TVButtonHover TVClickable">
-                                                                <div class="TVTourResultByRoomItemInfoWrapper">
-                                                                    <div class="TVTourResultByRoomItemImage TVClickable" style="background-image: url(&quot;https://static.tourvisor.ru/hotel_pics/rooms/74453/776503/3423991.jpg&quot;);"></div>
-                                                                    <div class="TVTourResultByRoomItemNameWrapper">
-                                                                        <div class="TVTourResultByRoomItemName">
-                                                                            <t-span class="TVRoomInfo">Economy</t-span>
-                                                                        </div>
-                                                                        <div class="TVTourResultByRoomItemParams">14 м<sup>2</sup>, 1 комната, 1 спальня</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="TVTourResultByRoomItemPriceWrapper">
-                                                                    <div class="TVTourResultByRoomItemPrice">60 279</div>
-                                                                    <div class="TVTourResultByRoomItemPriceKilo"></div>
-                                                                    <div class="TVTourResultByRoomItemPriceCurrency">РУБ</div>
-                                                                    <div class="TVTourResultByRoomItemArrow"></div>
-                                                                    <div class="TVTourResultByRoomItemWaiter TVHide"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="TVTourResultByRoomItemTours TVHide">
-                                                                <t-table>
-                                                                    <t-thead>
-                                                                        <t-tr></t-tr>
-                                                                    </t-thead>
-                                                                    <t-tbody></t-tbody>
-                                                                </t-table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="TVTourResultByRoomItem TVStyleTheme1">
-                                                            <div class="TVTourResultByRoomItemContent TVButtonHover TVClickable">
-                                                                <div class="TVTourResultByRoomItemInfoWrapper">
-                                                                    <div class="TVTourResultByRoomItemImage TVClickable" style="background-image: url(&quot;https://static.tourvisor.ru/hotel_pics/rooms/74453/776506/3423994.jpg&quot;);"></div>
-                                                                    <div class="TVTourResultByRoomItemNameWrapper">
-                                                                        <div class="TVTourResultByRoomItemName">
-                                                                            <t-span class="TVRoomInfo">Standard</t-span>
-                                                                        </div>
-                                                                        <div class="TVTourResultByRoomItemParams">17 м<sup>2</sup>, 1 комната, 1 спальня</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="TVTourResultByRoomItemPriceWrapper">
-                                                                    <div class="TVTourResultByRoomItemPrice">115 926</div>
-                                                                    <div class="TVTourResultByRoomItemPriceKilo"></div>
-                                                                    <div class="TVTourResultByRoomItemPriceCurrency">РУБ</div>
-                                                                    <div class="TVTourResultByRoomItemArrow"></div>
-                                                                    <div class="TVTourResultByRoomItemWaiter TVHide"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="TVTourResultByRoomItemTours TVHide">
-                                                                <t-table>
-                                                                    <t-thead>
-                                                                        <t-tr></t-tr>
-                                                                    </t-thead>
-                                                                    <t-tbody></t-tbody>
-                                                                </t-table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="TVResultToursFooter">
-                                                    <div class="TVResultToursFoooterControl TVStyleTheme2">
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursShareButton TVStyleTheme2 TVPaddingSize-M" title="">
-                                                            <div class="TVResultToursShareContent">
-                                                                <t-span class="TVResultToursShareContentIconWrapper">
-                                                                    <svg fill="#5c6672" viewBox="0 0 17.428 18.854" height="18.854" width="17.428" class="TVResultToursShareContentIcon" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M13.308,18.822H4.114a5.293,5.293,0,0,1-2.48-.32A2.918,2.918,0,0,1,.352,17.218a5.3,5.3,0,0,1-.32-2.482V10.142A5.321,5.321,0,0,1,.256,8.061,2.916,2.916,0,0,1,1.845,6.472a5.327,5.327,0,0,1,2.082-.224,1.023,1.023,0,0,1,0,2.045,5.506,5.506,0,0,0-1.3.067.9.9,0,0,0-.482.482,5.56,5.56,0,0,0-.069,1.3v4.594a5.516,5.516,0,0,0,.1,1.552.887.887,0,0,0,.389.391,5.538,5.538,0,0,0,1.551.1H13.31a5.53,5.53,0,0,0,1.55-.1.9.9,0,0,0,.391-.391,5.534,5.534,0,0,0,.1-1.551v-4.6a5.606,5.606,0,0,0-.067-1.3.9.9,0,0,0-.482-.483,5.6,5.6,0,0,0-1.3-.068,1.022,1.022,0,1,1,0-2.044,5.322,5.322,0,0,1,2.081.223,2.923,2.923,0,0,1,1.589,1.59,5.318,5.318,0,0,1,.223,2.08v4.6a5.281,5.281,0,0,1-.319,2.48A2.922,2.922,0,0,1,15.791,18.5a5.281,5.281,0,0,1-2.483.321ZM7.791,10.571h0V3.107L6.378,4.217A1.022,1.022,0,0,1,5.116,2.609L8.151.229a1.017,1.017,0,0,1,.37-.2h.041l.05-.012A.256.256,0,0,1,8.695,0H8.92l.056.007H9.04l.023.008h.022a1.032,1.032,0,0,1,.391.2L12.51,2.6a1.024,1.024,0,0,1-1.26,1.615L9.836,3.108v7.463a1.023,1.023,0,1,1-2.045,0Z"></path>
-                                                                    </svg>
-                                                                </t-span>
-                                                                <t-span class="TVResultToursShareContentText">Поделиться</t-span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursShowMoreButton TVStyleTheme2 TVPaddingSize-M" title="">Найти больше туров</div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursGroupButton TVStyleTheme2 TVPaddingSize-M" title="">Группировать по номерам</div>
-                                                        <div class="TVResultNavButton TVButtonHover TVResultToursMinimizeButton TVStyleTheme2 TVPaddingSize-M TVHide" title="">Свернуть</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="TVHotelResultItemZoomImgWrapper TVHide">
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                $endfor
-                                 
-                                
-                               
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
+       
+
+        <h2 class="section-title hot-tours-title">ГОРЯЩИЕ ТУРЫ</h2>
+        <div class="container hot-tours-grid">
+            $foreach(var tour in tours)
+           <div class="tour-card">
+                <div class="tour-image-container">
+                    
+                    
+                 <!-- изображение остаётся без изменений -->
     </div>
-</div>
+    <div class="tour-details">
+        <div class="tour-stars">Количество звезд: ${tour.Stars}</div>
+        <div class="tour-name">
+            <form action="/bigpage" method="POST" style="display: inline;">
+                <input type="hidden" name="tourId" value="${tour.Id}">
+                <button type="submit" class="tour-name-link">
+                    ${tour.Hotel.Name}
+                </button>
+            </form>
+        </div>
+        <div class="tour-location">${tour.City}, ${tour.Country}</div>
+        <div class="tour-price-row">
+            <span class="current-price">${tour.Price} ₽</span>
+            <span class="share-icon"></span>
+        </div>
+                </div>
+            </div>
+            $endfor
+            
 
 
-	
-    <hr align="center" width="500" size="2" color="#7a7a78" class="line_down">
-    <br>
-	
-	<style>
-        @media only screen  and (max-width: 395px){
-            .text_why_us{
-                font-size: 12px !important;
-    		    font-weight: 600 !important;
-            }
-        }
-        .why_us{
-            display: none;
-        }
-        .line_down{
-            display: none;
-        }
-		.why_us_div{
-			display: inline-block; 
-			margin-left:10px;
-			margin-bottom: 20px;
-		}
-		.icon_hot{
-			width: 60px;
-			height: 60px;
-			display: inline-block !important;
-			margin-bottom: -10px
-		}
-		.text_why_us{
-			display: inline-block !important;
-			font-size: 15px;
-    		font-weight: 500;
-			margin-left:20px;
-			margin-bottom: 0px !important;
-		}
-        .banner{
-            display: none;
-        }
-	</style>
-</div>
-<script type="text/javascript" src="//tourvisor.ru/module/init.js"></script>
+        </div>
 
-
-
-
-<style>
-    @media only screen  and (max-width: 500px){
-        .tv_mobile{
-            display: block !important;
-        }
-        .tv_comp{
-            display: none !important;
-        }
-        .banner{
-            display: block !important;
-        }
-        .hot_tours_mob{
-            display: block !important;
-        }
-        .why_us{
-            display: block;
-        }
-        .line_down{
-            display: block;
-        }
-    }
-    .hot_tours_mob{
-        font-size: 18px !important;
-        font-weight: 600 !important;
-        line-height: 17px;
-        text-transform: uppercase;
-        /* border-right: 1px solid #fff; */
-        line-height: 50px;
-        color: black;
-        display: block;
-        margin-top: 20px !important;
-        /* float: left; */
-        text-align: center;
-        font-family: 'Open Sans',Arial !important;
-    }
-    .tv_mobile{
-        display: none;
-    }
-    .hot_tours_tourvisor{
-        display: block;
-    }
-    .custom-btn {
-        width: 150px;
-        height: 40px;
-        color: #000;
-        border-radius: 5px;
-        padding: 10px 25px;
-        font-family: 'Lato', sans-serif;
-        font-weight: 500;
-        background: transparent;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        display: inline-block;
-        left: 820px;
-        top: 20px;
-        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-        7px 7px 20px 0px rgba(0,0,0,.1),
-        4px 4px 5px 0px rgba(0,0,0,.1);
-        outline: none;
-        }
-        .btn-4 {
-        background-color: #9ef305;
-        background-image: linear-gradient(315deg, #9ef305 0%, #9ef305 74%);
-        line-height: 42px;
-        padding: 0;
-        border: none;
-        }
-        .btn-4:hover{
-        background-color: #89d8d3;
-        background-image: linear-gradient(315deg, #9ef305 0%, #9ef305 74%);
-        }
-        .btn-4 span {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        }
-        .btn-4:before,
-        .btn-4:after {
-        position: absolute;
-        content: "";
-        right: 0;
-        top: 0;
-        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
-                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-            inset -4px -4px 6px 0 rgba(255,255,255,.9),
-            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-        transition: all 0.3s ease;
-        }
-        .btn-4:before {
-        height: 0%;
-        width: .1px;
-        }
-        .btn-4:after {
-        width: 0%;
-        height: .1px;
-        }
-        .btn-4:hover:before {
-        height: 100%;
-        }
-        .btn-4:hover:after {
-        width: 100%;
-        }
-        .btn-4 span:before,
-        .btn-4 span:after {
-        position: absolute;
-        content: "";
-        left: 0;
-        bottom: 0;
-        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
-                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-            inset -4px -4px 6px 0 rgba(255,255,255,.9),
-            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-        transition: all 0.3s ease;
-        }
-        .btn-4 span:before {
-        width: .1px;
-        height: 0%;
-        }
-        .btn-4 span:after {
-        width: 0%;
-        height: .1px;
-        }
-        .btn-4 span:hover:before {
-        height: 100%;
-        }
-        .btn-4 span:hover:after {
-        width: 100%;
-        }
-
-    .subheader {
-        font-size: 18px;
-    }
-
-    .newsImage {
-        float: left;
-        margin: 3px;
-        max-width: 90%;
-    }
-
-    .row {
-        width: 100%;
-        margin: 0 auto;
-        background-color: white;
-    }
-
-    .block {
-        width: 31%;
-        float: left;
-        background-color: white;
-        padding: auto;
-        padding-left: 10px;
-        /*margin-left: 1%;*/
-        padding: 1%;
-    }
-
-    .fcc-btn {
-        background-color: #d82424;
-        color: white !important;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        border-radius: 1px;
-    }
-
-    .fcc-btn:hover {
-        text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-        .subheader {
-            font-size: 18px;
-        }
-
-        .newsImage {
-            float: left;
-            margin: 3px;
-            max-width: 90%;
-        }
-
-        .row {
-            width: 100%;
-            margin: 0 auto;
-            background-color: white;
-
-            display: table-cell;
-            vertical-align: middle;
-
-        }
-
-        .block {
-            width: 100%;
-            float: left;
-            background-color: white;
-            padding: auto;
-            padding-left: 10px;
-            /*margin-left: 1%;*/
-            padding: 1%;
-        }
-
-        .fcc-btn {
-            background-color: #d82424;
-            color: white !important;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            border-radius: 1px;
-        }
-
-        .fcc-btn:hover {
-            text-decoration: none;
-        }
-
-        .block-btn {
-            text-decoration: none;
-        }
-
-    }
-</style>
-
-
-
-
-
-
-
-	
+    </main>
 </body>
 </html>

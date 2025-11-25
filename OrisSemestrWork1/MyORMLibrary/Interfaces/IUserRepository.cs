@@ -10,6 +10,7 @@ namespace OrisSemestrWork1.MyORMLibrary.Interfaces
     public interface IUserRepository
     {
         User Add(string login, string password);
-        User CheckUser(string login, string password, out bool isNewUser);
+        User Add2(string login, string password, out string sessionToken);
+        User CheckUser(string login, string password, out bool isNewUser, out string sessionToken);
     }
 }

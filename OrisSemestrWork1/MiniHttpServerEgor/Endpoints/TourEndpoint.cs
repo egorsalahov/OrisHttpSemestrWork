@@ -15,8 +15,7 @@ namespace MiniHttpServerEgor.Endpoints
     [Endpoint]
     public class TourEndpoint : EndpointBase
     {
-       
-
+      
         // /tour
         [HttpGet()]
         public IHttpResult MainSemestrovka()
@@ -48,9 +47,7 @@ namespace MiniHttpServerEgor.Endpoints
             catch (Exception ex)
             {
                 return Page("MiniHttpServerEgor/Template/Page/semerror.thtml", data);
-
             }
-
         }
     }
 }

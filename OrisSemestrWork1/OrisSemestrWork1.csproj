@@ -8,20 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="MiniHttpServerEgor\Template\Page\semafterjoin.thtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
     <PackageReference Include="Npgsql" Version="9.0.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="MiniHttpServerEgor\Template\Page\semafterjoin.thtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +24,16 @@
     <None Update="MiniHttpServerEgor\Template\Page\sem2.thtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="MiniHttpServerEgor\Template\Page\semaftercreate.thtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="MiniHttpServerEgor\Template\Page\semafterdelete.thtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MiniHttpServerEgor\Template\Page\semafteredit.thtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MiniHttpServerEgor\Template\Page\semafterjoin.thtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MiniHttpServerEgor\Template\Page\semafterlogin.thtml">
@@ -55,7 +51,16 @@
     <None Update="MiniHttpServerEgor\Template\Page\semerror.thtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="MiniHttpServerEgor\Template\Page\semtest.thtml">
+    <None Update="public\logo-goryashchih.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="public\map-pin.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="public\mappin2.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="public\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

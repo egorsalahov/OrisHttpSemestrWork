@@ -1,0 +1,797 @@
+﻿/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h2.section-title {
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    margin: 30px 0 20px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* --- Хедер (Верхняя часть) --- */
+.header {
+    background-color: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-and-links {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 45px; /* Примерная высота логотипа */
+    margin-right: 20px;
+}
+
+.auth-nav {
+    border: 1px solid #d92323;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    margin-right: 20px;
+}
+
+.btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.btn-tourist.active {
+    background-color: #d92323;
+    color: #fff;
+}
+
+.btn-agent {
+    color: #d92323;
+}
+
+.support-and-rating {
+    display: flex;
+    align-items: center;
+}
+
+.support {
+    display: flex;
+    align-items: center;
+    color: #d92323;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 15px;
+}
+
+.support-icon {
+    height: 25px; /* Иконка для поддержки */
+    width: 25px;
+    margin-right: 5px;
+}
+
+.rating-badge {
+    height: 50px; /* Иконка рейтинга/значка */
+}
+
+
+/* --- Главное меню (Вторая полоса) --- */
+.main-nav-wrapper {
+    background-color: #fff;
+    border-bottom: 5px solid #d92323;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 15px 10px;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+    .nav-item.active {
+        color: #d92323;
+        border-bottom: 3px solid #d92323;
+        margin-bottom: -3px;
+    }
+
+/* --- Секция поиска --- */
+.content-wrapper {
+    background-color: #f7f7f7;
+}
+
+.search-container {
+    background-color: #eef2f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.search-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.dropdown-from-moscow {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+    .dropdown-from-moscow .arrow-down {
+        font-size: 10px;
+        margin-left: 5px;
+    }
+
+.checkboxes input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #d92323;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #666;
+    margin-left: 15px;
+}
+
+.search-input-row {
+    margin-bottom: 15px;
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.input-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.main-search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+}
+
+.filters-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr 1.5fr; /* Настройка колонок для фильтров и кнопки */
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #d92323; /* Цвет иконки */
+}
+
+.filter-label {
+    font-size: 12px;
+    color: #666;
+    margin-right: auto;
+    text-transform: uppercase;
+}
+
+.filter-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.btn-search {
+    background-color: #d92323;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+}
+
+/* Дополнительные фильтры */
+.additional-filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+.dropdown {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-hotel-class {
+    display: block;
+}
+
+    .filter-hotel-class .filter-label {
+        display: block;
+        margin-bottom: 2px;
+    }
+
+.stars-rating {
+    color: orange;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+/* --- Готовые подборки туров --- */
+.precompiled-tours-title {
+    margin-top: 40px;
+}
+
+.precompiled-tours {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 20px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+    .precompiled-tours::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+
+.country-card {
+    flex: 0 0 auto; /* Не сжимать и не растягивать */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+    .country-card:hover {
+        border-color: #d92323;
+    }
+
+.flag-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.price {
+    color: #d92323;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.arrow-right {
+    font-size: 16px;
+    color: #d92323;
+    margin-left: 8px;
+}
+
+
+/* --- Горящие туры (Карточки) --- */
+.hot-tours-title {
+    margin-top: 20px;
+}
+
+.hot-tours-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.tour-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tour-image-container {
+    position: relative;
+    height: 200px; /* Фиксированная высота для изображений */
+}
+
+.tour-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discount-tag {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background-color: #d92323;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+    .discount-tag.red-bg {
+        background-color: #d92323; /* Для соответствия второму и третьему туру */
+    }
+
+    .discount-tag.orange-bg {
+        background-color: #fa983a; /* Для туров со скидкой -8% */
+    }
+
+.tour-details {
+    padding: 15px;
+}
+
+.tour-stars {
+    color: orange;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.tour-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.tour-location {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.tour-info, .tour-from {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.tour-price-row {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.old-price {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.current-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #d92323;
+    margin-right: auto;
+}
+
+.share-icon {
+    font-size: 20px;
+    color: #d92323;
+    cursor: pointer;
+}
+
+/* Медиа-запросы для адаптивности (если требуется) */
+@media (max-width: 992px) {
+    .hot-tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+        .filters-row .btn-search {
+            grid-column: span 2;
+        }
+
+    .additional-filters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .hot-tours-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-row {
+        grid-template-columns: 1fr;
+    }
+
+        .filters-row .btn-search {
+            grid-column: span 1;
+        }
+
+    .additional-filters {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Секция авторизации в хедере */
+.auth-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.auth-form-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+    .auth-form-inline input {
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        min-width: 90px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+        .auth-form-inline input::placeholder {
+            color: #999;
+            font-size: 13px;
+        }
+
+.btn-auth {
+    background-color: #d82423; /* Цвет как у основной кнопки поиска */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+    .btn-auth:hover {
+        background-color: #b01d1c;
+    }
+
+/* Логотип — увеличенный */
+.logo-img {
+    height: 90px; 
+    width: auto; /*auto*/
+    margin-right: 20px;
+}
+
+* Стиль для формы "Поиск по городу" */
+.city-search-form .search-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.city-search-form .input-with-icon {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.city-search-form .input-icon {
+    width: 16px;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.city-search-form .main-search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    background: transparent;
+    font-family: 'Roboto', sans-serif;
+}
+
+.city-search-form .btn-search {
+    padding: 10px 20px;
+    background-color: #d82423;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap;
+}
+
+    .city-search-form .btn-search:hover {
+        background-color: #b01d1c;
+    }
+
+.tour-name-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+    .tour-name-link:hover {
+        text-decoration: underline;
+        color: #d82423; /* или любой акцентный цвет */
+    }
+
+.success-message {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #e8f5e9; /* светло-зелёный фон */
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+    .success-message h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: #2e7d32; /* тёмно-зелёный текст */
+        font-family: 'Roboto', sans-serif;
+    }
+
+.error-message {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #ffebee; /* светло-красный фон */
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+    .error-message h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: #d32f2f; /* насыщенный красный */
+        font-family: 'Roboto', sans-serif;
+    }
+
+/* Секция администратора — только для главной или других страниц */
+.admin-section {
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 30px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+    .admin-section h2 {
+        color: #d82423;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .admin-section h3 {
+        color: #333;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 24px 0 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+    }
+
+.tour-form .form-group {
+    margin-bottom: 18px;
+}
+
+.tour-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #444;
+    font-size: 15px;
+}
+
+.tour-form input,
+.tour-form select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.2s;
+}
+
+    .tour-form input:focus,
+    .tour-form select:focus {
+        outline: none;
+        border-color: #d82423;
+        box-shadow: 0 0 0 2px rgba(216, 36, 35, 0.15);
+    }
+
+.submit-btn {
+    background-color: #d82423;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.2s;
+}
+
+    .submit-btn:hover {
+        background-color: #b01d1c;
+    }
+
+/* Стиль для формы поиска тура админом */
+.admin-search-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+    .admin-search-form input {
+        flex-grow: 1;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .admin-search-form button {
+        background-color: #d82423;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+    }
+
+        .admin-search-form button:hover {
+            background-color: #b01d1c;
+        }
+
+/* Админские действия внутри карточки тура */
+.admin-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.admin-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+    .admin-form input[type="number"] {
+        width: 110px;
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+/* Кнопка "Обновить цену" — оранжевая, как у вас */
+.btn-update {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+    .btn-update:hover {
+        background-color: #e69500;
+    }
+
+/* Кнопка "Удалить" — красная */
+.btn-delete {
+    background-color: #d82423; /* ваш фирменный красный */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+    .btn-delete:hover {
+        background-color: #b01d1c;
+    }

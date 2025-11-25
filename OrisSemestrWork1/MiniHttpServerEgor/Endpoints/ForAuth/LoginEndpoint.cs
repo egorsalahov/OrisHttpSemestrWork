@@ -5,6 +5,7 @@ using MyORMLibrary;
 using OrisSemestrWork1.MyORMLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,26 +26,34 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForAuth
             bool isNewUser;
             User user = null;
             var data = new {User = user};
+            string sessionToken = null;
+            var response = Context.Response;
 
             try
             {
                 ORMContext context = new ORMContext();
 
-                isNewUser = false; ; //чтобы проверить: вдруг пользователь пытается войти не зарегестрировавшись
-
-                user = context.Users.CheckUser(login, password, out isNewUser);
+                user = context.Users.CheckUser(login, password, out isNewUser, out sessionToken);
 
                 data = new { User = user };
 
-                if (!isNewUser) //все норм пользователь не регается с нуля а уже входит в созданный аккаунт
+                if (user != null && !isNewUser)
                 {
-                    return Page("MiniHttpServerEgor/Template/Page/semafterlogin.thtml", data);
+                    if (sessionToken != null)
+                    {
+                        // Данные для добавления куки в сессию
+                        DateTime expiration = DateTime.UtcNow.AddHours(1);
+                        string expiresDate = expiration.ToString("R", CultureInfo.InvariantCulture);
+                        string cookieValue = $"SessionToken={sessionToken}; HttpOnly; Secure; SameSite=Lax; Expires={expiresDate}";
 
+                        response.Headers.Add("Set-Cookie", cookieValue);
+                    }
+
+                    return Page("MiniHttpServerEgor/Template/Page/semafterlogin.thtml", data);
                 }
                 else
                 {
                     return Page("MiniHttpServerEgor/Template/Page/semerror.thtml", data);
-
                 }
             }
             catch (Exception ex)
