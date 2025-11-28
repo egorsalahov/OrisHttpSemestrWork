@@ -42,12 +42,6 @@
     <div class="main-nav-wrapper">
         <div class="container main-nav-container">
             <nav class="main-nav">
-                <a href="#" class="nav-item active">Горящие туры</a>
-                <a href="#" class="nav-item">Поиск тура</a>
-                <a href="#" class="nav-item">Поиск отеля</a>
-                <a href="#" class="nav-item">Офисы продаж</a>
-                <a href="#" class="nav-item">О компании</a>
-                <a href="#" class="nav-item">Индекс Горящих</a>
             </nav>
         </div>
     </div>
@@ -61,48 +55,80 @@
 
     <h2>Вы админ!</h2>
 
-    <form action="/create" method="POST" class="tour-form">
-        <h3>Создание нового тура</h3>
-        
-        <div class="form-group">
-            <label for="Country">Страна:</label>
-            <input type="text" id="Country" name="Country" required 
-                   placeholder="Например: Россия, Турция, Испания" 
-                   maxlength="50"
-                   pattern="[A-Za-zА-Яа-яЁё\s]+"
-                   title="Только буквы и пробелы">
-        </div>
+   <form action="/create" method="POST" class="tour-form">
+    <h3>Создание нового тура</h3>
+    
+    <div class="form-group">
+        <label for="Country">Страна:</label>
+        <input type="text" id="Country" name="country" required 
+               placeholder="Например: Россия, Турция, Испания" 
+               maxlength="50"
+               pattern="[A-Za-zА-Яа-яЁё\s]+"
+               title="Только буквы и пробелы">
+    </div>
 
-        <div class="form-group">
-            <label for="City">Город:</label>
-            <input type="text" id="City" name="City" required 
-                   placeholder="Например: Москва, Анталья, Барселона"
-                   maxlength="50"
-                   pattern="[A-Za-zА-Яа-яЁё\s]+"
-                   title="Только буквы и пробелы">
-        </div>
+    <div class="form-group">
+        <label for="City">Город:</label>
+        <input type="text" id="City" name="city" required 
+               placeholder="Например: Москва, Анталья, Барселона"
+               maxlength="50"
+               pattern="[A-Za-zА-Яа-яЁё\s]+"
+               title="Только буквы и пробелы">
+    </div>
 
-        <div class="form-group">
-            <label for="Stars">Количество звезд:</label>
-            <select id="Stars" name="Stars" required>
-                <option value="">Выберите количество звезд</option>
-                <option value="1">★ (1 звезда)</option>
-                <option value="2">★★ (2 звезды)</option>
-                <option value="3">★★★ (3 звезды)</option>
-                <option value="4">★★★★ (4 звезды)</option>
-                <option value="5">★★★★★ (5 звезд)</option>
-            </select>
-        </div>
+    <div class="form-group">
+        <label for="Stars">Количество звезд:</label>
+        <select id="Stars" name="stars" required>
+            <option value="">Выберите количество звезд</option>
+            <option value="1">★ (1 звезда)</option>
+            <option value="2">★★ (2 звезды)</option>
+            <option value="3">★★★ (3 звезды)</option>
+            <option value="4">★★★★ (4 звезды)</option>
+            <option value="5">★★★★★ (5 звезд)</option>
+        </select>
+    </div>
 
-        <div class="form-group">
-            <label for="Price">Цена (руб.):</label>
-            <input type="number" id="Price" name="Price" required 
-                   min="1" placeholder="Например: 50000"
-                   title="Цена должна быть положительным числом">
-        </div>
+    <div class="form-group">
+        <label for="Price">Цена (руб.):</label>
+        <input type="number" id="Price" name="price" required 
+               min="1" placeholder="Например: 50000"
+               title="Цена должна быть положительным числом">
+    </div>
 
-        <button type="submit" class="submit-btn">Создать тур</button>
-    </form>
+    <div class="form-group">
+        <label for="ImagePath">Ссылка на изображение (опционально):</label>
+        <input type="text" id="ImagePath" name="imagePath" 
+               placeholder="https://example.com/hotel.jpg или /images/tours/hotel.jpg"
+               title="Можно указать полный URL или относительный путь">
+        <small>Поддерживаются JPG, PNG, WebP. Поле соответствует параметру `imagePath`.</small>
+    </div>
+
+    <hr>
+    
+    <div class="form-group">
+        <label for="HotelName">Имя отеля (ОБЯЗАТЕЛЬНО):</label>
+        <input type="text" id="HotelName" name="hotelName" required 
+               placeholder="Например: Grand Hotel Atlantis"
+               maxlength="100">
+    </div>
+
+    <div class="form-group">
+        <label for="HotelAddress">Адрес отеля (ОБЯЗАТЕЛЬНО):</label>
+        <input type="text" id="HotelAddress" name="hotelAddress" required 
+               placeholder="Например: ул. Солнечная, д. 5"
+               maxlength="200">
+    </div>
+
+    <div class="form-group">
+        <label for="HotelShortDescription">Краткое описание отеля:</label>
+        <textarea id="HotelShortDescription" name="hotelShortDescription" 
+                 rows="5" maxlength="500"
+                 placeholder="Например: Уютный отель у моря с бассейном и бесплатным Wi-Fi..."></textarea>
+        <small>Максимум 500 символов.</small>
+    </div>
+
+    <button type="submit" class="submit-btn">Создать тур</button>
+</form>
 
     <h3>Поиск тура для изменения:</h3>
     <form action="/bycityadmin" method="POST" class="admin-search-form">

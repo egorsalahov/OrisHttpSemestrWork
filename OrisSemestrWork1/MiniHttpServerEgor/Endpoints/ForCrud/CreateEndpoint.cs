@@ -6,8 +6,10 @@ using OrisSemestrWork1.MyORMLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCrud
 {
@@ -17,17 +19,25 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCrud
        
 
         [HttpPost]
-        public IHttpResult Create(string country, string city, int stars, int price)
+        public IHttpResult Create(string country, string city, int stars, int price, string imagePath,
+                   string hotelName, string hotelShortDescription, string hotelAddress)
         {
+            //декодирование отеля
+            string decodedHotelName = HttpUtility.UrlDecode(hotelName);
+            string decodedHotelShortDescription = HttpUtility.UrlDecode(hotelShortDescription);
+            string decodedHotelAddress = HttpUtility.UrlDecode(hotelAddress);
+
             Tour tour = null;
             User user = null;
             var data = new {Tour = tour, User = user};
+           
 
             try
             {
                 ORMContext context = new ORMContext();
 
-                tour = context.Tours.Create(country, city, stars, price);
+                tour = context.Tours.Create(country, city, stars, price, imagePath,
+                    decodedHotelName, decodedHotelShortDescription, decodedHotelAddress);
 
                 user = new User() { Permission = true };
 
@@ -41,5 +51,6 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCrud
 
             }
         }
+
     }
 }

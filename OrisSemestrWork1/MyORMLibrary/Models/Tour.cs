@@ -13,6 +13,8 @@ namespace OrisSemestrWork1.MyORMLibrary.Models
         public string City { get; set; } = string.Empty;
         public int Stars { get; set; }
         public int Price { get; set; }
+        public string ImagePath { get; set; } = string.Empty;
+
 
         // Внешние ключи
         public int HotelId { get; set; }

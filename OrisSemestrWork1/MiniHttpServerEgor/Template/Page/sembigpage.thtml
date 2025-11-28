@@ -6,6 +6,7 @@
     <title>Детали тура</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Общие стили */
         * {
             margin: 0;
             padding: 0;
@@ -14,50 +15,89 @@
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #f4f7f9; /* Светло-серый фон для тела */
             color: #333;
             min-height: 100vh;
             padding: 20px;
         }
 
+        /* Главный контейнер (верхний баннер) */
         .TVMainForm {
-            background: white;
+            background: linear-gradient(135deg, #d82423, #ff5f5e); /* Градиент */
             border-radius: 12px;
             padding: 24px;
-            margin: 30px auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #eee;
+            margin: 30px auto 20px auto;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             max-width: 1000px;
+            text-align: center;
         }
 
         .TVMainForm h1 {
-            color: #d82423;
-            text-align: center;
-            margin-bottom: 8px;
-            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 0;
+            font-size: 32px;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* Контейнер с результатами */
         .TVSearchResults {
-            background: white;
+            background: #ffffff;
             border-radius: 12px;
-            padding: 28px;
+            padding: 0; /* Убрал внутренний паддинг, он будет внутри TVResultListViewItem */
             margin: 20px auto;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-            border: 1px solid #f0f0f0;
+            border: 1px solid #e0e0e0;
             max-width: 1000px;
         }
 
+        /* Элемент результата */
         .TVResultListViewItem {
             background: white;
             border-radius: 10px;
-            padding: 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f3f3f3;
+            padding: 30px; /* Увеличил паддинг */
+            box-shadow: none; /* Убрал лишнюю тень */
+            border: none;
         }
 
+        /* Обертка для изображения и основной информации */
+        .tour-image-and-info-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap; /* Для адаптивности */
+        }
+
+        /* Контейнер для изображения */
+        .tour-detail-image {
+            flex-basis: 40%;
+            min-width: 300px; /* Минимальная ширина для изображения */
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Контейнер для основной информации рядом с фото */
+        .TVHotelResulItemInfo {
+            flex-basis: calc(60% - 30px);
+            min-width: 300px; /* Минимальная ширина для блока инфо */
+        }
+        
+        .TVHotelInfo {
+            width: 100%;
+        }
+
+
+        /* Заголовок и подзаголовок */
         .TVResultItemHeader {
             margin-bottom: 24px;
             padding-bottom: 18px;
@@ -66,10 +106,9 @@
 
         .TVResultItemTitle {
             color: #000;
-            font-size: 26px;
+            font-size: 30px; /* Увеличил размер */
             font-weight: 700;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            margin-bottom: 6px;
         }
 
         .TVResultItemSubTitle {
@@ -78,78 +117,120 @@
             font-weight: 500;
         }
 
+        /* Звезды */
+        .stars {
+            color: #ffb700; /* Золотистый цвет для звезд */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Обертка для блоков информации */
         .TVResultItemBeforeDescriptionWrapper {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             padding: 20px;
             background: #fbfbfb;
             border-radius: 8px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid #e9e9e9;
+            transition: all 0.3s ease;
+        }
+        
+        .TVResultItemBeforeDescriptionWrapper:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-color: #d8242330;
         }
 
+        /* Заголовки разделов информации */
         .TVResultItemDescription h3 {
             color: #d82423;
-            margin-bottom: 14px;
-            font-size: 20px;
+            margin-bottom: 15px;
+            font-size: 22px; /* Увеличил размер */
             font-weight: 700;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #d82423;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #d82423; /* Более заметная линия */
         }
 
+        /* Параграфы с информацией */
         .TVResultItemDescription p {
             color: #333;
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 10px;
-            padding: 6px 0;
+            margin-bottom: 8px;
+            padding: 4px 0;
+            display: flex;
+            justify-content: space-between; /* Для выравнивания двоеточия */
         }
-
-        .TVResultItemDescription strong {
+        
+        .TVResultItemDescription p strong {
             color: #000;
             font-weight: 600;
+            flex-basis: 30%; /* Ширина для заголовка */
+            min-width: 150px;
+            padding-right: 10px;
+        }
+        
+        .TVResultItemDescription p span {
+            flex-grow: 1;
+            text-align: right; /* Значение справа */
         }
 
+        /* Блок с ценой */
         .TVResultItemPrice {
-            background: #fef7f7;
-            border-radius: 10px;
-            padding: 22px;
-            margin-top: 20px;
-            border: 1px solid #ffdada;
+            background: #ffebeb; /* Светло-красный фон */
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 2px solid #d82423;
             text-align: center;
         }
 
         .TVResultItemPriceValue {
             color: #d82423;
-            font-size: 32px;
+            font-size: 44px; /* Увеличил размер */
             font-weight: 700;
             margin-bottom: 4px;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         .TVResultItemPriceCurrency {
             color: #d82423;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
+            display: block;
+            margin-top: -5px;
         }
-
-        .TVHotelInfoStar {
-            color: #d82423;
-            font-size: 20px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        /* Звёзды как текст ★★★★ */
-        .stars {
-            color: #d82423;
-            font-size: 20px;
-            margin-bottom: 10px;
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .tour-image-and-info-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .tour-detail-image, .TVHotelResulItemInfo {
+                flex-basis: 100%;
+                min-width: 100%;
+            }
+            .TVResultItemTitle {
+                font-size: 24px;
+            }
+            .TVMainForm h1 {
+                font-size: 26px;
+            }
+            .TVResultItemDescription h3 {
+                font-size: 20px;
+            }
+            .TVResultItemPriceValue {
+                font-size: 36px;
+            }
+            .TVResultListViewItem {
+                 padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="TVMainForm">
-        <div style="text-align: center; padding: 20px 0;">
-            <h1>Детальная информация о туре</h1>
+        <div>
+            <h1>Детальная информация о туре ✈️</h1>
         </div>
     </div>
 
@@ -160,73 +241,48 @@
                     <div class="TVResultListViewList">
                         <div class="TVResultListViewItem">
                             <div class="TVHotelResultItem">
-                                <div class="TVHotelResulItemInfo">
-                                    <div class="TVHotelInfo">
-                                        <div class="TVResultItem">
-                                            <div class="TVResultItemBodyWrapper TVResultItemBodyWrapperStretched">
-                                                <div class="TVResultItemHeader">
-                                                    <div class="TVResultItemPreTitle">
-                                                        <div class="stars">
-                                                            <!-- Можно генерировать звёзды через сервер, если нужно -->
-                                                            ★★★★★
+                                <div class="tour-image-and-info-wrapper">
+                                    
+                                    <div class="tour-image-container tour-detail-image">
+                                        
+                                        <img src="${ImagePath}" alt="${Hotel.Name}" class="tour-image">
+                                    </div>
+
+                                    <div class="TVHotelResulItemInfo">
+                                        <div class="TVHotelInfo">
+                                            <div class="TVResultItem">
+                                                <div class="TVResultItemBodyWrapper TVResultItemBodyWrapperStretched">
+                                                    
+                                                    <div class="TVResultItemHeader">
+                                                        <div class="TVResultItemPreTitle">
+                                                            <div class="stars">
+                                                                ★★★★★
+                                                            </div>
+                                                        </div>
+                                                        <div class="TVResultItemTitle">
+                                                            ${Hotel.Name}
+                                                        </div>
+                                                        <div class="TVResultItemSubTitle">${City}, ${Country}</div>
+                                                    </div>
+                                                    
+                                                    <div class="TVResultItemBeforeDescriptionWrapper">
+                                                        <div class="TVResultItemDescription">
+                                                            <h3>Обзор тура 🗺️</h3>
+                                                            <p><strong>ID тура:</strong> <span>${Id}</span></p>
+                                                            <p><strong>Страна:</strong> <span>${Country}</span></p>
+                                                            <p><strong>Город:</strong> <span>${City}</span></p>
+                                                            <p><strong>Звезды:</strong> <span>${Stars}</span></p>
+                                                            <p><strong>HotelId:</strong> <span>${HotelId}</span></p>
                                                         </div>
                                                     </div>
-                                                    <div class="TVResultItemTitle">
-                                                        ${Hotel.Name}
-                                                    </div>
-                                                    <div class="TVResultItemSubTitle">${City}, ${Country}</div>
-                                                </div>
-                                                
-                                                <div class="TVResultItemBeforeDescriptionWrapper">
-                                                    <div class="TVResultItemDescription">
-                                                        <h3>Основная информация о туре</h3>
-                                                        <p><strong>ID тура:</strong> ${Id}</p>
-                                                        <p><strong>Страна:</strong> ${Country}</p>
-                                                        <p><strong>Город:</strong> ${City}</p>
-                                                        <p><strong>Звезды:</strong> ${Stars}</p>
-                                                        <p><strong>Цена:</strong> ${Price} руб.</p>
-                                                        <p><strong>HotelId:</strong> ${HotelId}</p>
-                                                        <p><strong>ContactId:</strong> ${ContactId}</p>
-                                                        <p><strong>LegalInfoId:</strong> ${LegalInfoId}</p>
-                                                    </div>
-                                                </div>
 
-                                                <div class="TVResultItemBeforeDescriptionWrapper">
-                                                    <div class="TVResultItemDescription">
-                                                        <h3>Информация об отеле</h3>
-                                                        <p><strong>Hotel.Id:</strong> ${Hotel.Id}</p>
-                                                        <p><strong>Hotel.Name:</strong> ${Hotel.Name}</p>
-                                                        <p><strong>Hotel.ShortDescription:</strong> ${Hotel.ShortDescription}</p>
-                                                        <p><strong>Hotel.Address:</strong> ${Hotel.Address}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="TVResultItemBeforeDescriptionWrapper">
-                                                    <div class="TVResultItemDescription">
-                                                        <h3>Контактная информация</h3>
-                                                        <p><strong>Contact.Id:</strong> ${Contact.Id}</p>
-                                                        <p><strong>Contact.PhoneNumber:</strong> ${Contact.PhoneNumber}</p>
-                                                        <p><strong>Contact.ContactName:</strong> ${Contact.ContactName}</p>
-                                                        <p><strong>Contact.Email:</strong> ${Contact.Email}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="TVResultItemBeforeDescriptionWrapper">
-                                                    <div class="TVResultItemDescription">
-                                                        <h3>Юридическая информация</h3>
-                                                        <p><strong>LegalInfo.Id:</strong> ${LegalInfo.Id}</p>
-                                                        <p><strong>LegalInfo.RegistryEntry:</strong> ${LegalInfo.RegistryEntry}</p>
-                                                        <p><strong>LegalInfo.CompanyName:</strong> ${LegalInfo.CompanyName}</p>
-                                                        <p><strong>LegalInfo.InsuranceInfo:</strong> ${LegalInfo.InsuranceInfo}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="TVResultItemPrice">
-                                                    <div class="TVResultItemPriceValueWrapper">
-                                                        <div class="TVResultItemNewPrice">
-                                                            <div class="TVResultItemPriceValue">${Price}</div>
-                                                            <div class="TVResultItemPriceSuffix">
-                                                                <div class="TVResultItemPriceCurrency">РУБ</div>
+                                                    <div class="TVResultItemPrice">
+                                                        <div class="TVResultItemPriceValueWrapper">
+                                                            <div class="TVResultItemNewPrice">
+                                                                <div class="TVResultItemPriceValue">${Price}</div>
+                                                                <div class="TVResultItemPriceSuffix">
+                                                                    <div class="TVResultItemPriceCurrency">РУБ</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,6 +291,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="TVResultItemBeforeDescriptionWrapper">
+                                    <div class="TVResultItemDescription">
+                                        <h3>Подробная информация об отеле 🏨</h3>
+                                        <p><strong>Название:</strong> <span>${Hotel.Name}</span></p>
+                                        <p><strong>Краткое описание:</strong> <span>${Hotel.ShortDescription}</span></p>
+                                        <p><strong>Адрес:</strong> <span>${Hotel.Address}</span></p>
+                                    </div>
+                                </div>
+
+                                <div class="TVResultItemBeforeDescriptionWrapper">
+                                    <div class="TVResultItemDescription">
+                                        <h3>Контактная информация 📞</h3>
+                                        <p><strong>Номер телефона:</strong> <span>${Contact.PhoneNumber}</span></p>
+                                        <p><strong>Контактное лицо:</strong> <span>${Contact.ContactName}</span></p>
+                                        <p><strong>Email:</strong> <span>${Contact.Email}</span></p>
+                                    </div>
+                                </div>
+
+                                <div class="TVResultItemBeforeDescriptionWrapper">
+                                    <div class="TVResultItemDescription">
+                                        <h3>Юридическая информация 📜</h3>
+                                        <p><strong>Реестровый номер:</strong> <span>${LegalInfo.RegistryEntry}</span></p>
+                                        <p><strong>Название компании:</strong> <span>${LegalInfo.CompanyName}</span></p>
+                                        <p><strong>Информация о страховке:</strong> <span>${LegalInfo.InsuranceInfo}</span></p>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

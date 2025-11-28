@@ -18,7 +18,7 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCitySearch
 
         // Post /bycity
         [HttpPost("bycity")]
-        public IHttpResult BigPage(string cityName)
+        public IHttpResult ByCities(string cityName)
         {
             List<Tour> tours = null;
             var data = new { Tours = tours };
@@ -31,12 +31,12 @@ namespace OrisSemestrWork1.MiniHttpServerEgor.Endpoints.ForCitySearch
 
                 data = new { Tours = tours };
 
-                return Page("C:\\Users\\egors\\source\\repos\\OrisSemestrWork1\\OrisSemestrWork1\\MiniHttpServerEgor\\Template\\Page\\sembycity.thtml", data);
+                return Page("MiniHttpServerEgor/Template/Page/sembycity.thtml", data);
 
             }
             catch (Exception ex)
             {
-                return Page("C:\\Users\\egors\\source\\repos\\OrisSemestrWork1\\OrisSemestrWork1\\MiniHttpServerEgor\\Template\\Page\\semerror.thtml", data);
+                return Page("MiniHttpServerEgor/Template/Page/semerror.thtml", data);
 
             }
 

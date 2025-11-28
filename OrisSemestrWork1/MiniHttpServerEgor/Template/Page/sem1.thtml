@@ -40,12 +40,6 @@
     <div class="main-nav-wrapper">
         <div class="container main-nav-container">
             <nav class="main-nav">
-                <a href="#" class="nav-item active">Горящие туры</a>
-                <a href="#" class="nav-item">Поиск тура</a>
-                <a href="#" class="nav-item">Поиск отеля</a>
-                <a href="#" class="nav-item">Офисы продаж</a>
-                <a href="#" class="nav-item">О компании</a>
-                <a href="#" class="nav-item">Индекс Горящих</a>
             </nav>
         </div>
     </div>
