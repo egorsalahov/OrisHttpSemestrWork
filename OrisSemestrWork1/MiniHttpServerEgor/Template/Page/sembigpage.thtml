@@ -272,7 +272,6 @@
                                                             <p><strong>Страна:</strong> <span>${Country}</span></p>
                                                             <p><strong>Город:</strong> <span>${City}</span></p>
                                                             <p><strong>Звезды:</strong> <span>${Stars}</span></p>
-                                                            <p><strong>HotelId:</strong> <span>${HotelId}</span></p>
                                                         </div>
                                                     </div>
 

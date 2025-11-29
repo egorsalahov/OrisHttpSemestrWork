@@ -14,14 +14,54 @@ namespace MiniHttpServerEgorFramework.Core.Handlers
             if (true)
             {
                 var request = context.Request;
-                var endpointName = request.Url?.AbsolutePath.Split('/')[1]; ;
+
+
+                string[] segments = request.Url?.AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+
+                // Если сегментов нет (т.е. был только "/"), используем специальное имя для корня Root.
+                var endpointName = segments.Length == 0 ? "Root" : segments[0];
 
                 var assembly = Assembly.GetEntryAssembly();
                 var endpont = assembly.GetTypes()
                                        .Where(t => t.GetCustomAttribute<EndpointAttribute>() != null)
                                        .FirstOrDefault(end => IsCheckedNameEndpoint(end.Name, endpointName));
 
-                if (endpont == null) return; // TODO: 
+                if (endpont == null)
+                {
+                    context.Response.StatusCode = 404;
+                    context.Response.StatusDescription = "Not Found";
+
+                    var data = new { };
+
+                  
+                    try
+                    {
+                        
+                        Type pageResultType = typeof(PageResult);
+
+                        // Создаём экземпляр: new PageResult("MiniHttpServerEgor/Template/Page/semerror.thtml", data)
+                        object pageResult = Activator.CreateInstance(
+              pageResultType,
+              "MiniHttpServerEgor/Template/Page/semerror.thtml",
+              data
+            );
+
+                        if (pageResult is PageResult page)
+                        {
+                            string html = page.Execute(context);
+                            await WriteResponseAsync(context.Response, html);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Запасной вариант, если не получилось отрендерить страницу
+                        Console.WriteLine($"Ошибка при рендеринге 404 страницы: {ex.Message}");
+                        string simpleErrorHtml = "<h1>404</h1><p>Запрашиваемый ресурс не найден.</p>";
+                        await WriteResponseAsync(context.Response, simpleErrorHtml);
+                        return;
+                    }
+                }
 
                 var method = endpont.GetMethods().Where(t => t.GetCustomAttributes(true)
                             .Any(attr => attr.GetType().Name.Equals($"Http{context.Request.HttpMethod}",

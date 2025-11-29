@@ -15,16 +15,6 @@ namespace MiniHttpServerEgor.Endpoints
     [Endpoint]
     public class TourEndpoint : EndpointBase
     {
-      
-        // /tour
-        [HttpGet()]
-        public IHttpResult MainSemestrovka()
-        {
-            var obj = new { };
-
-            return Page("MiniHttpServerEgor/Template/Page/sem1.thtml", obj);
-        }
-
         // Post /tour/search
         [HttpPost("search")]
         public IHttpResult DataFromForm(string country, int stars, int budget)
