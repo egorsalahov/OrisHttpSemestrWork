@@ -51,3 +51,89 @@
 - Код ответа (200, 404 и т.д.)
 
 Сервер готов к работе сразу после запуска и не требует сложной настройки.
+
+###Скрипты для создания базы данных
+
+Для корректной работы сервера необходимо создать и наполнить структуру базы данных `tours_db` с помощью следующих SQL-команд.
+
+### 1. Создание базы данных
+
+- Выполните эту команду, чтобы создать базу данных (требуется подключение к базе, которая позволяет создавать новые базы, например, `postgres`):
+    
+SQL
+
+```
+CREATE DATABASE tours_db WITH ENCODING 'UTF8';
+```
+
+### 2. Создание таблиц и связей
+
+- Подключитесь к только что созданной базе данных `tours_db` и выполните **весь** следующий SQL-скрипт.
+    
+SQL
+
+```
+-- Таблица Users
+CREATE TABLE Users (
+    Id SERIAL PRIMARY KEY,
+    Login VARCHAR(100) NOT NULL UNIQUE, 
+    PasswordInHash VARCHAR(255) NOT NULL,
+    Permission BOOLEAN NOT NULL DEFAULT FALSE 
+);
+
+
+-- Таблица Contacts
+
+CREATE TABLE Contacts (
+    Id SERIAL PRIMARY KEY,
+    phone_number VARCHAR(20) NOT NULL,
+    contact_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100)
+);
+
+
+-- Таблица Legal_Info
+
+CREATE TABLE Legal_Info (
+    Id SERIAL PRIMARY KEY,
+    registry_entry VARCHAR(50) NOT NULL,
+    company_name VARCHAR(150) NOT NULL,
+    insurance_info VARCHAR(200)
+);
+
+
+-- Таблица Hotels
+
+CREATE TABLE Hotels (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    short_description TEXT, 
+    Address VARCHAR(200) NOT NULL
+);
+
+
+
+
+-- Таблица Sessions (связь с Users)
+
+CREATE TABLE Sessions (
+    Token VARCHAR(36) PRIMARY KEY, 
+    UserId INTEGER NOT NULL REFERENCES Users(Id),
+    ExpiresAt TIMESTAMP WITH TIME ZONE NOT NULL,
+    CreatedAt TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Таблица Tours (связь с Hotels, Contacts, Legal_Info)
+
+CREATE TABLE Tours (
+    Id SERIAL PRIMARY KEY,
+    country VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    stars INTEGER NOT NULL,
+    price INTEGER NOT NULL,
+    hotel_id INTEGER NOT NULL REFERENCES Hotels(Id),
+    contact_id INTEGER NOT NULL REFERENCES Contacts(Id),
+    legal_info_id INTEGER NOT NULL REFERENCES Legal_Info(Id),
+    image_path TEXT
+);
+```
